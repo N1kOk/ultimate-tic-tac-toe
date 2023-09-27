@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import { Board } from '@/Game'
 import classNames from 'classnames'
+import O from '@/components/O'
+import X from '@/components/X'
 
 type GridProps = {
   board: Board
@@ -8,19 +10,14 @@ type GridProps = {
 }
 
 const Grid: FC<GridProps> = ({ board, onClick }) => {
-  const x = (
-    <>
-      <div className={'absolute bg-white w-[7vmin] h-[1vmin] rotate-45 rounded-full'}></div>
-      <div className={'absolute bg-white w-[7vmin] h-[1vmin] -rotate-45 rounded-full'}></div>
-    </>
-  )
-
-  const o = (
-    <div className={'absolute border-[1vmin] border-white w-[6vmin] h-[6vmin] rounded-full'}></div>
-  )
-
   return (
-    <div className={`grid grid-cols-3 grid-rows-3 gap-1 ${board.isActive ? 'brightness-150' : 'brightness-90'}`}>
+    <div
+      className={classNames({
+        'grid grid-cols-3 grid-rows-3 gap-1': true,
+        'brightness-90': !board.isActive,
+        'brightness-150': board.isActive
+      })}
+    >
       {
         board.getCells().map((value, index) =>
           <div
@@ -32,7 +29,7 @@ const Grid: FC<GridProps> = ({ board, onClick }) => {
               'cell--win': board.winRow.length && board.winRow.find(value => value === index) !== undefined
             })}
           >
-            {value && (value === 'x' ? x : o)}
+            {value && (value === 'x' ? <X/> : <O/>)}
           </div>)
       }
     </div>
