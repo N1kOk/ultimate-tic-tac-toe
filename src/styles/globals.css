@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    --size: 1;
+    --animationStartTime: 0s;
+    @apply text-white overflow-hidden;
+}
+
 .cell {
     @apply
     flex justify-center items-center text-white select-none
@@ -17,5 +23,30 @@
 
 .cell--win {
     box-shadow: 0 0 3px 0 #cc6cf5, inset 0 0 3px 0 #cc6cf5;
+    animation: pulse 1s infinite alternate ease-out 1s;
     @apply bg-[#cc6cf5] drop-shadow-[0_0_7px_#cc6cf5] brightness-150;
+}
+
+.background-shape {
+    --size: 0.5;
+    animation: fall 50s infinite ease-in var(--animationStartTime);
+    @apply absolute top-0 scale-50;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+@keyframes pulse {
+    from {
+        filter: brightness(150%) var(--tw-drop-shadow);
+    }
+    to {
+        filter: brightness(100%) var(--tw-drop-shadow);
+    }
 }
