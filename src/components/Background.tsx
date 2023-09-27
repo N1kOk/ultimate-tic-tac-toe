@@ -20,12 +20,12 @@ const Background: FC = () => {
       )}
       {listX.map(({ rotate, left, timeStart }, i) =>
         <div
+          key={i}
           // @ts-ignore
           style={{ '--animationStartTime': `${timeStart}s`, left: `${left}vw` }}
           className={'background-shape h-[25px]'}
         >
           <X
-            key={i}
             style={{ transform: `rotate(${rotate}deg)` }}
             className={'opacity-5'}
           />
