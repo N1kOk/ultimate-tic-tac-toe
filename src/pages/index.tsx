@@ -7,10 +7,10 @@ import Background from '@/components/Background'
 export default function Index() {
   const [, forceUpdate] = useReducer(x => x + 1, 0)
 
-  const game = useMemo(() => new Game(), [])
+  const game = useMemo(() => new Game(forceUpdate), [])
 
-  const handleClick = (boardIndex: number, cellIndex: number) => {
-    game.makeMove(boardIndex, cellIndex)
+  const handleClick = async (boardIndex: number, cellIndex: number) => {
+    await game.makeMove(boardIndex, cellIndex)
     forceUpdate()
   }
 
